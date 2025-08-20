@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anjali Aravinthan — Portfolio</title>
+  <meta name="description" content="Portfolio of Anjali Aravinthan — Web Developer & UI/UX Designer. Projects, experience, and contact." />
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="Anjali Aravinthan — Portfolio" />
+  <meta property="og:description" content="Web Developer & UI/UX Designer. Explore projects and experience." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --bg: #0b0d12;
+      --border:white;
+      --panel: #111827;
+      --elev: #0f172a;
+      --text: #e5e7eb;
+      --text-2: #22d3ee;
+      --muted: #9ca3af;
+      --brand: #7c3aed; /* violet-600 */
+      --brand-2: #22d3ee; /* cyan-400 */
+      --ok: #10b981;
+      --warn: #fb923c;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow-2: 0 0 15px 6px rgba(0, 255, 255, 0.8);
+      --radius-xl: 1.25rem;
+      --radius-2xl: 1.75rem;
+      --ring: 0 0 0 2px var(--brand);
+      --maxw: 1200px;
+      --title: rgba(0, 255, 255, 0.8); 
+    }
+    :root.light {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --elev: #f3f4f6;
+      --text: #0b1220;
+      --muted: #4b5563;
+      --shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+      --shadow-2: 0 0 15px 6px #7c3aed;
+      --title: #75286e;
+    }
+
+    /* ===== Reset / Base ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(124,58,237,.25), transparent 60%),
+                  radial-gradient(900px 500px at 0% 110%, rgba(34,211,238,.25), transparent 60%),
+                  var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(92vw, var(--maxw)); margin-inline: auto; }
+    .container-2 { width: min(92vw, var(--maxw)); margin-inline: auto; height: 750px; }
+    .grid { display: grid; gap: clamp(14px, 2vw, 24px); }
+
+    /* ===== Skip link ===== */
+    .skip {
+      position: absolute; inset-inline-start: 1rem; inset-block-start: -100px;
+      background: var(--panel); color: var(--text); padding: .6rem .9rem; border-radius: .6rem;
+      box-shadow: var(--shadow); z-index: 1000;
+    }
+    .skip:focus { inset-block-start: 1rem; outline: none; box-shadow: var(--ring); }
+
+    /* ===== Top progress bar ===== */
+    .progress {
+      position: fixed; inset-inline: 0; inset-block-start: 0; height: 3px;
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      transform-origin: 0 50%; transform: scaleX(0); z-index: 9999;
+    }
+
+    /* ===== Navbar ===== */
+    header {
+      padding: 5px;
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: saturate(120%) blur(10px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom: 3px solid color-mix(in srgb, var(--border) 32%, transparent);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: .8rem 0;
+    }
+    .brand {
+      display: flex; align-items: center; gap: .75rem; font-weight: 800;
+      letter-spacing: .3px;
+    }
+    .brand .dot {
+      width: 14px; aspect-ratio: 1; border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand));
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--brand) 25%, transparent);
+    }
+    .nav .links {
+      display: flex; gap: clamp(10px, 3vw, 18px); align-items: center;
+    }
+    .nav a.link {
+      padding: .55rem .8rem; border-radius: .7rem; color: var(--muted); font-weight: 600;
+    }
+    .nav a.link:hover, .nav a.link:focus-visible {
+      color: var(--text-2); background: color-mix(in srgb, var(--text) 8%, transparent);
+      outline: none;
+    }
+    .btn {
+      padding: .65rem .95rem; border-radius: .9rem; font-weight: 700; border: 1px solid transparent;
+      background: linear-gradient(180deg, var(--brand), color-mix(in srgb, var(--brand) 75%, #000));
+      color: white; box-shadow: var(--shadow);
+    }
+    .btn:hover { transform: scale(1.05); cursor: pointer; }
+    .btn:active { transform: translateY(0); }
+
+    /* Mobile nav */
+    .hamb { display: none; }
+    @media (max-width: 860px) {
+      .hamb { display: inline-flex; align-items: center; gap: .5rem; }
+      .nav .links { position: fixed; inset-inline: 0; inset-block-start: 56px; padding: 1rem;
+        background: var(--panel); border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+        display: grid; gap: .6rem; transform: translateY(-120%); transition: transform .35s ease; }
+      .nav .links.open { transform: translateY(0); }
+      .btn.cta { display: none; }
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      display: grid; grid-template-columns: 1.2fr .8fr; align-items: center;
+      gap: clamp(16px, 4vw, 40px); padding-block: clamp(36px, 6vw, 86px);
+    }
+    .title {
+      font-family: "Space Grotesk", Inter, system-ui, sans-serif;
+      font-size: clamp(32px, 6vw, 64px); line-height: 1.05; letter-spacing: -.5px; font-weight: 800;
+    }
+    .subtitle { font-size: clamp(14px, 2.3vw, 18px); color: var(--muted); max-width: 60ch; }
+    .chips { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .chips-2 { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .chip {
+      border: 2px solid color-mix(in srgb, var(--text) 20%, transparent); color: var(--text);
+      padding: .35rem .6rem; border-radius: 999px; font-size: .85rem;
+      background: color-mix(in srgb, var(--panel) 70%, transparent);
+    }
+    .chip:hover {
+      border: 2px solid color-mix(in srgb, var(--text) 20%, transparent);
+      cursor: pointer; font-weight: bold;
+    }
+    .heroCard {
+      position: relative; border-radius: var(--radius-2xl); overflow: clip;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--panel) 70%, transparent), var(--panel));
+      box-shadow: var(--shadow-2); isolation: isolate;
+    }
+    .heroArt {
+      aspect-ratio: 4/3; display: grid; place-items: center; position: relative;
+    }
+    .heroArt img:hover {
+      cursor: pointer;
+    }
+    .blob {
+      position: absolute; width: 120%; aspect-ratio: 1; border-radius: 999px;
+      background: conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--brand));
+      filter: blur(40px); opacity: .35; animation: float 14s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translate(-10%, -5%) scale(1); }
+      50% { transform: translate(4%, 6%) scale(1.08); }
+    }
+    .heroStat {
+      position: absolute; inset: auto 1rem 1rem auto; background: color-mix(in srgb, var(--panel) 70%, transparent);
+      border: 1px solid color-mix(in srgb, var(--text) 14%, transparent); border-radius: 1rem;
+      padding: .7rem .9rem; font-size: .9rem; display: grid; gap: .15rem; box-shadow: var(--shadow);
+    }
+
+    /* ===== Section header ===== */
+    section { padding-block: clamp(36px, 7vw, 90px); }
+    .sh { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+    .sh h2 { font-size: clamp(22px, 3.5vw, 34px); font-weight: 800; }
+    .muted { color: var(--muted); }
+
+    /* ===== About ===== */
+    .about {
+      display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 4vw, 32px);
+    }
+    .about .card {
+      padding: clamp(16px, 3vw, 28px); border-radius: var(--radius-xl);
+      background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+      box-shadow: var(--shadow);
+    }
+    @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .about { grid-template-columns: 1fr; } }
+
+    /* ===== Experience timeline ===== */
+    .timeline { position: relative; padding-left: 26px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 10px; top: 4px; bottom: 4px; width: 2px;
+      background: linear-gradient(180deg, var(--brand), transparent 60%);
+    }
+    .t-item { position: relative; padding: .4rem 0 .9rem 0; }
+    .t-item::marker { content: ""; }
+    .t-dot {
+      position: absolute; left: -2px; top: 8px; width: 14px; height: 14px; border-radius: 999px;
+      background: radial-gradient(circle at 35% 35%, var(--brand-2), var(--brand));
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 20%, transparent);
+    }
+
+    /* ===== Projects (Bento grid) ===== */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: clamp(12px, 2vw, 18px);
+    }
+    .card {
+      padding: clamp(14px, 2.5vw, 22px);
+      background: var(--panel);
+      border-radius: var(--radius-xl);
+      border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+      box-shadow: var(--shadow);
+      overflow: clip;
+    }
+    .project {
+      grid-column: span 4;
+      display: grid; gap: .6rem;
+    }
+    .project .thumb {
+      border-radius: .9rem; overflow: clip; border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      aspect-ratio: 16/9; position: relative;
+      background:
+        radial-gradient(60% 60% at 30% 35%, color-mix(in srgb, var(--brand) 12%, transparent), transparent),
+        linear-gradient(180deg, color-mix(in srgb, var(--panel) 60%, transparent), var(--elev));
+    }
+    .tag { font-size: .75rem; color: var(--muted); border: 1px dashed color-mix(in srgb, var(--text) 25%, transparent);
+      padding: .25rem .5rem; border-radius: 999px; }
+    .project h3 { margin: .15rem 0 0; font-size: clamp(16px, 2.4vw, 20px); }
+    .project .actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .ghost {
+      border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+      background: transparent; color: var(--text); padding: .55rem .8rem; border-radius: .7rem; font-weight: 600;
+    }
+    .ghost:hover { background: color-mix(in srgb, var(--text) 10%, transparent); }
+    @media (max-width: 1100px) { .project { grid-column: span 6; } }
+    @media (max-width: 720px)  { .project { grid-column: span 12; } }
+
+    /* ===== Contact ===== */
+    .contact {
+      display: grid; grid-template-columns: 1.3fr .7fr; gap: clamp(14px, 3vw, 28px);
+    }
+    .contact .form { display: grid; gap: .8rem; }
+    .input, textarea {
+      width: 100%; padding: .85rem 1rem; border-radius: .85rem; border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+      background: color-mix(in srgb, var(--panel) 70%, transparent); color: var(--text);
+    }
+    .input:focus, textarea:focus { outline: none; box-shadow: var(--ring); }
+    textarea { min-height: 140px; resize: vertical; }
+    @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+
+    /* ===== Utilities ===== */
+    .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .center { text-align: center; }
+    .pill { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .6rem; border-radius: 999px; background: color-mix(in srgb, var(--brand) 18%, transparent); color: var(--text); border: 1px solid color-mix(in srgb, var(--brand) 40%, transparent) }
+    .mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}
+
+    /* ===== Reveal animations ===== */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ===== Footer ===== */
+    footer { padding: 28px 0; border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent); color: var(--muted); }
+    .foot { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 20px; }
+    .tiny { font-size: .9rem; }
+
+    .flex-gallery {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+/* Optional: Custom scrollbar for WebKit browsers */
+.flex-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.flex-gallery::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.flex-gallery::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+/* Image styling */
+.flex-gallery img {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flex-gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.thumb img:hover {
+  cursor: pointer;
+}
+
+.lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .lightbox-1 {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-1 img {
+            width: 400PX;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close1 {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .flex-gallery img:hover {
+            cursor: pointer;
+        }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Anjali Aravinthan",
+    "jobTitle":"Web Developer & UI/UX Designer",
+    "email":"mailto:anjaliaravinthan6@gmail.com",
+    "telephone":"+94 77 833 1587",
+    "url":"https://anjali2626.github.io/ProfilePage/",
+    "alumniOf": "Cardiff Metropolitan University"
+  }
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to content</a>
+  <div class="progress" id="progress"></div>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Anjali&nbsp;Aravinthan</span>
+        <span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7h7l-5.7 4.1 2.2 7L12 16.9 5.5 20l2.2-7L2 9h7z"/></svg> Web Dev • UI/UX</span>
+      </div>
+
+      <nav aria-label="Primary">
+        <button class="hamb ghost" id="hamb" aria-expanded="false" aria-controls="navlinks">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Menu
+        </button>
+        <div class="links" id="navlinks">
+          <a class="link" href="#about">About</a>
+          <a class="link" href="#experience">Experience</a>
+          <a class="link" href="#projects">Projects</a>
+          <a class="link" href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <button class="btn cta" id="themeBtn" aria-label="Toggle theme">Toggle theme</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="container hero" style="padding-bottom: 40px;">
+      <div>
+        <h1 class="title reveal"><span style="color: var(--title);">Hi, I’m Anjali,</span> building delightful, accessible web experiences.</h1>
+        <p class="subtitle mt-3 reveal" style="max-width:65ch">
+          Motivated Software Engineering student at <strong>Cardiff Metropolitan University</strong> with a passion for
+          <strong>web development</strong> and <strong>UI/UX design</strong>. I love crafting performant, accessible interfaces
+          with clean code and meaningful motion.
+        </p>
+         <div class="mt-3 muted">Based in Sri Lanka • Open to remote</div>
+        <div class="mt-4 reveal" style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top: 40px;">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="ghost" href="#contact" aria-label="Jump to contact">Get in touch</a>
+        </div>
+      </div>
+
+      <aside class="heroCard reveal" aria-hidden="true">
+        <div class="heroArt">
+          
+          <!-- Inline decorative SVG -->
+          <img src="123.png">
+        
+        <div class="heroStat">
+          <strong>Actively seeking</strong>
+          <span class="muted">Real-world projects & internships</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container">
+      <div class="sh">
+        <h2>About <span style="color: var(--title);">Me</span> </h2>
+        <span class="muted">Curious • Collaborative • User-first</span>
+      </div>
+      <div class="about">
+        <div class="card reveal">
+          <p>
+            I’m a <strong>Web Developer & UI/UX Designer</strong> who enjoys turning complex problems
+            into elegant, intuitive interfaces. Driven by a curiosity for technology and a dedication to continuous learning, 
+            I aim to contribute to impactful projects that enhance user experiences. <br><br> Enthusiastic about learning emerging technologies 
+            and solving real-world challenges through coding and development. My goal is to work in an 
+            organization that fosters growth, allowing me to refine my skills while making meaningful contributions.
+          </p>
+          <p class="muted">Always eager to take on real-world projects and grow technical skills.</p>
+        </div>
+        <div class="card reveal">
+          <ul class="grid" style="grid-template-columns: repeat(1, minmax(0,1fr)); margin:0; padding-left: 1rem;">
+          <div class="mt-3 muted">Technical Skills</div>
+          <div class="chips reveal">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">React.js</span>
+          <span class="chip">Node.js</span>
+          <span class="chip">Express.js</span>
+          <span class="chip">React Native</span>
+          <span class="chip">PHP</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">WordPress</span>
+          <span class="chip">Hostinger</span>
+          </div>
+          <div class="mt-3 muted">Soft Skills</div>
+          <div class="chips reveal">
+          <span class="chip">Responsive Design</span>
+          <span class="chip">Problem-Solving</span>
+          <span class="chip">Team Collaboration</span>
+          <span class="chip">Critical Thinking</span>
+          <span class="chip">Time Management</span>
+          <span class="chip">Adaptability</span>
+          </div>
+          </ul>
+         
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="container-2">
+      <div class="sh">
+        <h2>Work <span style="color: var(--title);">Experience</span></h2>
+        <span class="muted">Hands-on, collaborative, shipping value</span>
+      </div>
+      <ol class="timeline">
+        <li class="t-item reveal">
+          <span class="t-dot" aria-hidden="true"></span>
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom: 10px;">
+              <strong>Web Developer Intern — Code Alpha</strong>
+              <span class="muted">July 2025 – Present</span>
+            </div>
+            <ul class="mt-2" style="margin:0; padding-left:1.1rem;">
+              <li>Developed dynamic web pages using PHP and MySQL for data-driven functionality.</li>
+              <li>Integrated React.js components to enhance user interactivity and performance.</li>
+              <li>Participated in code reviews and maintained version control using Git.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+      
+      <ol class="timeline">
+        <li class="t-item reveal">
+          <span class="t-dot" aria-hidden="true"></span>
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom: 10px;">
+              <strong>Frontend Developer Intern — Code Alpha</strong>
+              <span class="muted">May 2025 – June 2025</span>
+            </div>
+            <ul class="mt-2" style="margin:0; padding-left:1.1rem;">
+              <li>Built responsive UI components with HTML, CSS, JavaScript.</li>
+              <li>Collaborated within sprints on a remote team.</li>
+              <li>Received a Letter of Recommendation & Certificate.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+      
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="container">
+      <div class="sh">
+        <h2>My <span style="color: var(--title);">Projects</span></h2>
+        <span class="muted">Selected work across web & UX</span>
+      </div>
+
+      <div class="bento">
+        <!-- HomeTech Services -->
+        <article class="project card reveal" aria-labelledby="p1-title">
+          <div class="thumb" role="img" aria-label="HomeTech Services Website mockup with cards and contact form">
+            <img src="a.png" onclick="openLightbox(this)">
+            <div class="tag" style="margin-top: 20px;">WordPress • Responsive</div>
+          </div>
+          <h3 id="p1-title">HomeTech Services Company Website</h3>
+          <p class="muted">Designed a responsive company website with service details and contact forms to improve user experience and accessibility.</p>
+          <div class="actions">
+            <a class="ghost" href="https://hometechservice.ca" target="_blank" rel="noopener">View Live</a>
+            <button class="btn" data-modal="#modal-hometech" aria-haspopup="dialog">Case Study</button>
+          </div>
+        </article>
+
+        <!-- SeaBreeze Travels -->
+        <article class="project card reveal" aria-labelledby="p2-title">
+          <div class="thumb" role="img" aria-label="SeaBreeze Travels full-stack site with dashboards and booking UI">
+            <img src="Screenshot (72).png" onclick="openLightbox(this)">
+            <div class="tag" style="margin-top: 20px;">Full Stack • Ticket Booking</div>
+          </div>
+          <h3 id="p2-title">SeaBreeze Travels Company Website</h3>
+          <p class="muted">Designed & developed with admin and customer panels, real-time updates, and responsive layouts.</p>
+          <div class="actions">
+            <button class="btn" data-modal="#modal-seabreeze" aria-haspopup="dialog">See Details</button>
+          </div>
+        </article>
+
+        <!-- Zoological Park -->
+        <article class="project card reveal" aria-labelledby="p3-title">
+          <div class="thumb" role="img" aria-label="Zoological Park management dashboards and event scheduling">
+            <img src="Screenshot (71).png" onclick="openLightbox(this)">
+            <div class="tag" style="margin-top: 20px;">Full Stack • Admin/Customer</div>
+          </div>
+          <h3 id="p3-title">Zoological Park Management System</h3>
+          <p class="muted">Built a web app with separate dashboards for managing community events, focused on usability and accessibility.</p>
+          <div class="actions">
+            <button class="btn" data-modal="#modal-zoo" aria-haspopup="dialog">Read More</button>
+          </div>
+        </article>
+
+        <div id="lightbox" class="lightbox">
+          <span class="close" onclick="closeLightbox()">&times;</span>
+          <img id="lightbox-img" src="" alt="Expanded View">
+        </div>
+
+        <!-- Design work -->
+         <br><br>
+        <article class="project card reveal" aria-labelledby="p4-title" style="grid-column: span 12; margin-top: 50px;">
+          <div class="tag">UI/UX Designs</div>
+          <br>
+          <h3 id="p4-title">My UI/UX Designs</h3>
+          <p class="muted">
+            <div class="chips-2 reveal">
+               <span class="chip"><a href="https://www.figma.com/design/epDtF71bIaFqIcbcJLTbbp/Hot-Kitchen-Restaurant-Website?node-id=0-1&t=1uFcYEthMc04t16Q-1">Hot Kitchen Restaurant Website </a></span>
+               <span class="chip"><a href="https://www.figma.com/design/JPngAKOUVuAHPsFI4DsI6G/SeaBreeze-Travels-Website?node-id=0-1&t=TAzsoMEIliTHd9yW-1">SeaBreeze Travels Website </a></span>
+               <span class="chip"><a href="https://www.figma.com/proto/xPZrakBk4vDyaIBYRP3cnx/Redesigned-UI-Layout?page-id=0%3A1&node-id=12-717&p=f&viewport=393%2C489%2C0.24&t=3cDpVjEwGhHfaPJH-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=12%3A717">HY Technologies Company Website </a></span>           
+              <span class="chip"><a href="https://www.figma.com/proto/30QRIdwSaS09TukME0s56T/Event-Management-Web-App?page-id=0%3A1&node-id=1-7&p=f&viewport=373%2C-172%2C0.41&t=NNrRSoGEulgKH01V-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A7">Event Management System Dashboard </a></span>           
+              </div>
+            </p>
+        </article>
+        <br>
+        <article class="project card reveal" aria-labelledby="p4-title" style="grid-column: span 12; margin-top: 20px;">
+  <div class="tag">Designing Projects</div>
+  <h3 id="p4-title">Visual Designs • Leaflets • Advertisements</h3>
+  
+  <div id="gallery" style="display: flex; margin-top: 20px; gap: 20px; overflow-x: auto; padding-bottom: 10px;" class="flex-gallery">
+    <img src="BOBA Cafe.png" alt="Design 1" style="width: 100px; margin-right: 10px;" onclick="openLightBOX(this)">
+    <img src="Aloe Vera Gel.jpg" alt="Design 2" style="width: 100px; margin-right: 10px;" onclick="openLightBOX(this)">
+    <img src="3.png" alt="Design 2" style="width: 100px; margin-right: 10px;" onclick="openLightBOX(this)">
+    <img src="Potato Chips.png" alt="Design 2" style="width: 100px; margin-right: 10px;" onclick="openLightBOX(this)">
+    <img src="HAMBUR.jpg" alt="Design 2" style="width: 100px; margin-right: 10px;" onclick="openLightBOX(this)">
+    <img src="MUSIC.jpg" alt="Design 2" style="width: 100px; margin-right: 10px;" onclick="openLightBOX(this)">
+    <img src="5.png" alt="Design 2" style="width: 100px; margin-right: 10px;" onclick="openLightBOX(this)">
+    
+  </div>
+</article>
+
+<div id="lightbox-1" class="lightbox-1">
+      <span class="close1" onclick="closeLightBOX()">&times;</span>
+      <img id="lightbox-img-1" src="" alt="Expanded View-1">
+  </div>
+
+      </div>
+    </section>
+
+    
+    <section id="contact" class="container">
+      <div class="sh">
+        <h2>Contact <span style="color: var(--title);">Me</span></h2>
+        <span class="muted">Let’s build something great</span>
+      </div>
+      <div class="contact">
+        <form class="card form reveal" id="contactForm" novalidate>
+          <div>
+            <label class="sr" for="name">Name</label>
+            <input class="input" id="name" name="name" placeholder="Your name" autocomplete="name" required>
+          </div>
+          <div>
+            <label class="sr" for="email">Email</label>
+            <input class="input" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <div>
+            <label class="sr" for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <div style="display:flex; gap:.6rem; align-items:center; flex-wrap:wrap">
+            <button type="submit" class="btn">Send message</button>
+            <span class="muted tiny" id="formNote" role="status" aria-live="polite">No spam. All fields required.</span>
+          </div>
+        </form>
+
+        <aside class="card reveal">
+          <div style="display:grid; gap:.6rem">
+            <div><strong>Email</strong><div><a href="mailto:anjaliaravinthan6@gmail.com">anjaliaravinthan6@gmail.com</a></div></div>
+            <div><strong>Phone</strong><div><a href="tel:+94778331587">+94 77 833 1587</a></div></div>
+            <div><strong>Location</strong><div class="muted">Sri Lanka • Remote-friendly</div></div>
+            <div class="mt-3"><span class="pill">Open to internships & freelance</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <div class="tiny">© <span id="year"></span> Anjali Aravinthan</div>
+      <div class="tiny">2025 All Rights Reserved</div>
+    </div>
+  </footer>
+
+  <!-- ===== Modals ===== -->
+  <dialog id="modal-hometech" aria-labelledby="mh-title">
+    <form method="dialog" class="card" style="max-width:min(92vw,720px); border:none">
+      <h3 id="mh-title">HomeTech Services — Case Study</h3>
+      <p class="muted">Responsive WordPress site with service taxonomy, contact CTAs, and form integration. Optimized for Core Web Vitals with compressed assets and logical headings.</p>
+      <menu style="display:flex; gap:.5rem; justify-content:flex-end; padding:0; margin-top:1rem">
+        <a class="ghost" href="https://hometechservice.ca" target="_blank" rel="noopener">Visit</a>
+        <button class="btn">Close</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="modal-seabreeze" aria-labelledby="ms-title">
+    <form method="dialog" class="card" style="max-width:min(92vw,720px); border:none">
+      <h3 id="ms-title">SeaBreeze Travels — Details</h3>
+      <ul class="muted" style="margin:0; padding-left:1.1rem">
+        <li>Admin & customer panels with role-based access</li>
+        <li>Real-time updates for bookings/status</li>
+        <li>Responsive components & accessible forms</li>
+      </ul>
+      <menu style="display:flex; gap:.5rem; justify-content:flex-end; padding:0; margin-top:1rem">
+        <button class="btn">Close</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="modal-zoo" aria-labelledby="mz-title">
+    <form method="dialog" class="card" style="max-width:min(92vw,720px); border:none">
+      <h3 id="mz-title">Zoological Park Management System</h3>
+      <p class="muted">Web app for managing events, dashboards with clear hierarchy and keyboard-friendly interactions. Focus on WCAG color contrast and form semantics.</p>
+      <menu style="display:flex; gap:.5rem; justify-content:flex-end; padding:0; margin-top:1rem">
+        <button class="btn">Close</button>
+      </menu>
+    </form>
+  </dialog>
+
+
+  <script>
+    // ===== Utilities
+    const $ = (q, root=document) => root.querySelector(q);
+    const $$ = (q, root=document) => Array.from(root.querySelectorAll(q));
+
+    // ===== Theme toggle (respects system + persists)
+    (function initTheme(){
+      const stored = localStorage.getItem('theme');
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      if (stored === 'light' || (!stored && prefersLight)) document.documentElement.classList.add('light');
+      $('#themeBtn').addEventListener('click', () => {
+        document.documentElement.classList.toggle('light');
+        localStorage.setItem('theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+      });
+    })();
+
+    function openLightbox(imgElement) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+
+            lightboxImg.src = imgElement.src;
+            lightbox.style.display = "flex";
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = "none";
+        }
+
+    function openLightBOX(imageElement) {
+            const lightBOX = document.getElementById('lightbox-1');
+            const lightBOXImg = document.getElementById('lightbox-img-1');
+
+            lightBOXImg.src = imageElement.src;
+            lightBOX.style.display = "flex";
+        }
+
+        function closeLightBOX() {
+            document.getElementById('lightbox-1').style.display = "none";
+        }
+
+
+
+    // ===== Mobile nav
+    (function(){
+      const hamb = $('#hamb');
+      const links = $('#navlinks');
+      const toggle = () => {
+        const open = links.classList.toggle('open');
+        hamb.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+      hamb.addEventListener('click', toggle);
+      links.addEventListener('click', (e) => {
+        if (e.target.matches('a')) { links.classList.remove('open'); hamb.setAttribute('aria-expanded','false'); }
+      });
+    })();
+
+    // ===== Scroll progress
+    (function(){
+      const bar = $('#progress');
+      const update = () => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const sc = (h.scrollTop || document.body.scrollTop) / max;
+        bar.style.transform = `scaleX(${sc})`;
+      };
+      document.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+
+    // ===== Reveal on view (IntersectionObserver)
+    (function(){
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        $$('.reveal').forEach(el => io.observe(el));
+      } else {
+        $$('.reveal').forEach(el => el.classList.add('in'));
+      }
+    })();
+
+    // ===== Smooth anchor scroll (respects reduced motion)
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced) {
+        document.addEventListener('click', (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+          const id = a.getAttribute('href').slice(1);
+          const target = document.getElementById(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, '', `#${id}`);
+          }
+        });
+      }
+    })();
+
+    // ===== Dialog modals
+    (function(){
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-modal]');
+        if (!btn) return;
+        const sel = btn.getAttribute('data-modal');
+        const dialog = document.querySelector(sel);
+        if (dialog?.showModal) dialog.showModal();
+      });
+      // Close dialog on backdrop click
+      $$('dialog').forEach(d => {
+        d.addEventListener('click', (e) => {
+          const rect = d.getBoundingClientRect();
+          const inDialog = (rect.top <= e.clientY && e.clientY <= rect.bottom
+                         && rect.left <= e.clientX && e.clientX <= rect.right);
+          if (!inDialog) d.close();
+        });
+      });
+    })();
+
+    // ===== Simple contact form validation (client-side only demo)
+    (function(){
+      const form = $('#contactForm');
+      const note = $('#formNote');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const name = data.get('name')?.toString().trim();
+        const email = data.get('email')?.toString().trim();
+        const msg = data.get('message')?.toString().trim();
+        if (!name || !email || !msg) {
+          note.textContent = 'Please fill in all fields.';
+          note.style.color = 'var(--warn)';
+          return;
+        }
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!emailOk) {
+          note.textContent = 'Enter a valid email address.';
+          note.style.color = 'var(--warn)';
+          return;
+        }
+        // Demo success
+        note.textContent = 'Thanks! Your message is ready to send from your email app.';
+        note.style.color = 'var(--ok)';
+        // Optional: open mail app with prefill
+        const body = encodeURIComponent(msg + '\n\n— ' + name);
+        window.location.href = `mailto:anjaliaravinthan6@gmail.com?subject=Portfolio Inquiry from ${encodeURIComponent(name)}&body=${body}`;
+        form.reset();
+        setTimeout(() => { note.textContent = 'No spam. All fields required.'; note.style.color = ''; }, 4000);
+      });
+    })();
+
+    // ===== Year
+    $('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
